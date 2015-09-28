@@ -8,32 +8,25 @@ using namespace std;
 void coutmat(string  mat[10][10])
 {
     string c;
-    for( int i=1;i<=10;i++)
+    cout<<"\n";
+    cout<<"\n";
+    for( int i=0;i<10;i++)
+{
+    c="";
+    for( int j=0;j<10;j++)
     {
-        c="";
-        for( int j=1;j<=10;j++)
-        {
-            c+= "|" + mat[i][j];
-        }
-        c+="|";
+        c+= "|" + mat[i][j];
     }
- //print c
+    c+="|\n";
+    cout<<c;
+
 }
-//printMat(l2)
+ cout<<"\n";
+}
+
 void  barco(string  mat[10][10],int m,int d,int a,int b)
 {
-    //int m,d,a,b;
 
-   /*cout<< "usted puede ingresar 3 barcos";
-   cout<<"ingrese la medida del barco";
-   cin>>m;
-   cout<<"decea que la posicion del barco sea: H:1,V:0";
-   cin>>d;
-   cout<<"indique la cordenada x";
-   cin>>a;
-   cout<<"indique la cordena y";
-   cin>>b;
-   #l2[a-1][b-1]="a"*/
     if (a+m>10 or a+m<1)
     {
         cout<< "vuelva a ingresar cordenada";
@@ -79,18 +72,7 @@ void  barco(string  mat[10][10],int m,int d,int a,int b)
    }
 }
 
-/*void  cantbarcos( string mat[10][10])
-{
-    int c;
-    c=1;
-    while (c<=3)
-    {
-        string  barco( string   mat);
-        c=c+1;
-    }
-    cout<<  coutmat(  mat[10][10]);
-}
-*/
+
 
    void disparos( int p,int q,string   mat[10][10])
     {
@@ -98,18 +80,15 @@ void  barco(string  mat[10][10],int m,int d,int a,int b)
     k=1;
     while (k==1)
     {
-    /*cout<<"ingrese disparo de la coode  en x";
-    cin>>p;
-    cout<<"ingrese diaparo en la coorde  en y";
-    cin>>q;
-*/
-        if (  mat[p-1][q-1]=='x')
+
+        if (  mat[p-1][q-1]=="x")
         {
             cout<<"muerto";
-            cout<<"coincidio disparo al al barco bravoooooooo";
+            cout<<"coincidio disparo al barco bravoooooooo";
+            cout<<"\n";
 
 
-            //cout<< coutmat(mat[10][10]);
+            coutmat(mat);
             k=0;
         }
 
@@ -123,32 +102,29 @@ void  barco(string  mat[10][10],int m,int d,int a,int b)
 
 
 int main()  {
-   /* int mat[]={{2,0,0,0,0,0,0,0,0,0},
-      {0,5,0,0,0,0,0,0,0,0},
-      {0,0,0,0,0,0,0,0,0,0},
-      {0,0,0,0,4,0,0,0,0,0},
-      {0,0,0,0,0,0,0,0,0,0},
-      {0,0,0,0,0,0,0,0,0,0},
-      {0,0,0,0,0,0,0,0,0,0},
-      {0,0,0,0,0,0,0,0,2,0},
-      {0,0,0,0,0,0,0,0,0,0},
-      {0,0,0,0,0,0,0,0,8,0}};*/
-       string  mat[10][10]={"o"};
+
+    string mat[10][10];
+        for( int i=0;i<10;i++){
+            for( int j=0;j<10;j++){
+                mat[i][j]='o';
+        }
+       }
     int p,q,m,d,a,b;
 
-    cout<< "usted puede ingresar 3 barcos";
     cout<<"ingrese la medida del barco";
         cin>>m;
-    cout<<"decea que la posicion del barco sea: H:1,V:0";
+    cout<<"decea que la posicion del barco sea: H:0,V:1";
         cin>>d;
     cout<<"indique la cordenada x";
         cin>>a;
     cout<<"indique la cordena y";
         cin>>b;
     //cantbarcos( mat);
+    barco(mat, m,d, a, b);
     cout<<"ingrese disparo de la coode  en x";
         cin>>p;
     cout<<"ingrese diaparo en la coorde  en y";
         cin>>q;
     disparos(p,q,mat);
 }
+
