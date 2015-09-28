@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-#include TAM 8
+#define  TAM 8
 int main() {
 
 	int ana[8],i;
