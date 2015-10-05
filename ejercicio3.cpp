@@ -1,33 +1,38 @@
+
 #include <iostream>
 using namespace std;
 int main(){
-int a,n;
-bool b;
-b=false;
+int a,i;
+bool flag;
 a=0;
-for(int  long i=2520;i<2526;i++)
+i=2520;
+flag=true;
+while(i>0 and flag==true)
+//for(int  long i=2520;i<2526;i++)
 //n=2520;
-
-        for(int j=1;j<21;j++)
+{
+    cout<<endl;
+    for(int j=1,a=0;j<21;j++)
         {
 
-            if(n%j==0)
+            if(i%j==0)
             {
-
                 a=a+1;
-                //cout<<a;
+                //cout<<a<<"   ";
             }
-          
- if(a==20)
-    {
-    cout<<n<<"es divisible con cada numero del 1-20";
-    break;
-
-    }
-    
+            if(a==20)
+            {
+            cout<<i<<"es divisible con cada numero del 1-20";
+            j=22;
+            flag=false;
+            }
         }
+        i++;
+
+}
 
 
     }
+
 
 
