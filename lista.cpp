@@ -11,7 +11,6 @@ bool lista::agregar(int dato)
     if(inicio)
     {
         inicio=new nodo(dato);
-        fin=inicio;
     }
     else
     {
