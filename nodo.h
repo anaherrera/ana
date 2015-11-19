@@ -1,16 +1,14 @@
-#ifndef NODO_H
-#define NODO_H
 
-
+template<typename T>//template>class T>
 class nodo
 {
     public:
-        nodo(int);
+        nodo(T dato);
         //virtual ~nodo();
     //protected:
     private:
-        int dato;
-        nodo *sig;
+        T dato;
+        nodo<T> *sig;
 };
 
 #endif // NODO_H
