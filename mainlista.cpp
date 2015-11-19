@@ -3,7 +3,7 @@ using namespace std;//buscar un archivo
 # include"lista.h"
 int main()
 {
-    lista a;
+    lista<int> a;
     a.agregar(3);
     a.agregar(4);
     a.agregar(333);
