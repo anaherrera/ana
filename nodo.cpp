@@ -3,7 +3,9 @@
 
 using namespace std;
 
-nodo::nodo()
+template<typename T>
+
+nodo<T>::nodo( T dato)
 {
   this -> nodo=0
 }
