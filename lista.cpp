@@ -20,7 +20,7 @@ void lista<T>::agregar(T dato)
         fin->sig=new nodo(dato);
         fin=fin->sig;
     }
-
+    cont++;
 }
 //return 1;
 
