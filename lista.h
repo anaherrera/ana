@@ -1,3 +1,4 @@
+
 #ifndef LISTA_H
 #define LISTA_H
 #include "nodo.h"
@@ -5,22 +6,26 @@
 
 using namespace std;
 
+
+template<typename T>
 class lista
 {
     public:
         //nodo *inicio;
        // nodo *fin;
         lista();
-        bool  agregar(int);
+        void  agregar(T dato);
 
-        bool borrar(int);
-        bool imprimir();
+        void borrar(const T &dato);
+        void imprimir();
 
         //virtual ~lista();
     protected:
     private:
-        nodo *inicio;
-        nodo *fin;
+        nodo<T> *inicio;
+        nodo<T> *fin;
+        T cont;
+
 
 };
 
