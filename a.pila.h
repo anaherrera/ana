@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include <vector>
 using namespace std;
@@ -25,6 +26,23 @@ class pila{
                 c.push(b.get_vector()[i]);
             }
             return c;
-      }
+        }
+
+        pila operator -(pila b)
+        {
+            pila c;
+            if (vec.size()== b.get_vector().size())
+            {
+                    for( int i=0;i<vec.size();i++)
+                    {
+                        c.push(vec[i]-b.get_vector()[i]);
+                    }
+                     return c;
+            }
+            cout <<"el tamanio de las pilas no coinciden"<<endl;
+
+
+
+        }
 
 };
