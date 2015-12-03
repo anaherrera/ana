@@ -1,130 +1,215 @@
-#include<iostream>
-#include<string>
+
+#include <iostream>
+#include "gomoku.h"
 using namespace std;
-#include "bm.h"
 
+const int n=6;
+const int m=8;
 
-
-void coutmat(string  mat[10][10])
+bool sobranEspaciosLibres(int tablero[n][m])
 {
-    string c;
-    cout<<"\n";
-    cout<<"\n";
-    for( int i=0;i<10;i++)
-{
-    c="";
-    for( int j=0;j<10;j++)
+    for(int i = 0; i < 6; i++)
     {
-        c+= "|" + mat[i][j];
-    }
-    c+="|\n";
-    cout<<c;
-
-}
- cout<<"\n";
-}
-
-void  barco(string  mat[10][10],int m,int d,int a,int b)
-{
-
-    if (a+m>10 or a+m<1)
-    {
-        cout<< "vuelva a ingresar cordenada";
-        cout<<"indique la cordenada x";
-            cin>>a;
-        cout<<"indique la cordena y";
-            cin>>b;
-    }
-    if (b+m>10 or b+m<1)
-    {
-        cout<<"vuelva a ingresar cordenada";
-        cout<<"indique la cordenada x";
-            cin>>a;
-        cout<<"indique la cordena y";
-            cin>>b;
-    }
-    if (a>10 or b>10)
-    {
-        cout<<"vuelbaq a ingresar coo  la tabla es de 10*10";
-        cout<<"indique la cordenada x";
-            cin>>a;
-        cout<<"indique la cordena y";
-            cin>>b;
-    }
-    else
-    {
-        if (d==0)//horizontal
+        for(int j = 0; j < 8; j++)
         {
-            mat[a-1][b-1]='x';
-            for( int i=1;i<=m;i++)
+            if(tablero[i][j] == 0)
             {
-                mat[a-1][b+i-1]='x';
+                //Sobran espacios donde colocar fechas
+                //cout<<"Hay espacios"<<endl;
+                return true;
             }
         }
-        if (d==1)//vertical
-        {
-            mat[a-1][b-1]='x';
-                for( int i=1;i<=m;i++)
-                {
-                    mat[a+i-1][b-1]='x';
-                }
-        }
-   }
+    }
+
+    //No sobran mas espacios donde colocar fichas, juego empatado
+    cout<<"No hay mas espacios: empate"<<endl;
+    return false;
 }
 
-
-
-   void disparos( int p,int q,string   mat[10][10])
+void ImprimirTablero(int tablero[n][m])
+{
+    for(int i = 0; i < 6; i++)
     {
-    int k;
-    k=1;
-    while (k==1)
-    {
-
-        if (  mat[p-1][q-1]=="x")
+        for(int j = 0; j < 8; j++)
         {
-            cout<<"muerto";
-            cout<<"coincidio disparo al barco bravoooooooo";
-            cout<<"\n";
+            if(tablero[i][j] == 1)
+            {
+                cout<<"| O ";
+            }
+            else if(tablero[i][j] == 2)
+            {
+                cout<<"| X ";
+            }
+            else
+            {
+                cout<<"| . ";
+            }
 
-
-            coutmat(mat);
-            k=0;
         }
-
-        else
-        {
-            cout<<"dipare otra vez";
-            k=1;
-        }
+        cout<<" |";
+        cout<<endl;
     }
 }
 
-
-int main()  {
-
-    string mat[10][10];
-        for( int i=0;i<10;i++){
-            for( int j=0;j<10;j++){
-                mat[i][j]='o';
+int ColocarFichaEn(int tablero[n][m], int columna)
+{
+    for(int i = 0; i < n; i++)
+    {
+        if(i+1 < n)
+        {
+            if( tablero[i+1][columna] != 0 )
+            {
+                return i; //posicionamos  la ficha en la ultima posicion
+            }
         }
-       }
-    int p,q,m,d,a,b;
+        else
+        {
+            //Alcanzo la tope del tablero
+            if(tablero[i][columna] == 0)
+            {
+                return i;
+            }
+        }
+    }
 
-    cout<<"ingrese la medida del barco";
-        cin>>m;
-    cout<<"decea que la posicion del barco sea: H:0,V:1";
-        cin>>d;
-    cout<<"indique la cordenada x";
-        cin>>a;
-    cout<<"indique la cordena y";
-        cin>>b;
-    //cantbarcos( mat);
-    barco(mat, m,d, a, b);
-    cout<<"ingrese disparo de la coode  en x";
-        cin>>p;
-    cout<<"ingrese diaparo en la coorde  en y";
-        cin>>q;
-    disparos(p,q,mat);
+    return -1;
 }
 
+bool columnaATope(int tablero[n][m], int columna)
+{
+    if(tablero[0][columna] != 0)
+    {
+        cout<<"No hay espacio "<<endl;
+        return true;
+    }
+    return false;
+}
+
+bool ganador(int tablero[n][m], int fila, int columna, int jugador)
+{
+    //Vertical
+    bool encontrado = false;//inicializamos encontrado  en falso
+    int total = 0;
+
+    for(int i = 0; i < n; i++)
+    {
+        //cout<<"i: "<<i<<endl;
+        if(encontrado)
+        {
+            if(tablero[i][columna] == jugador)
+            {
+                total++;
+            }
+            else
+            {
+                encontrado = false;
+                total = 0;
+            }
+        }
+        if(tablero[i][columna] == jugador && !encontrado)
+        {
+            encontrado = true;
+            total++;
+        }
+
+        if(total == 4)
+        {
+            cout<<"El jugador "<<jugador<<" gana!"<<endl;
+            return true;
+        }
+    }
+
+    //Horizontal
+    encontrado = false;
+    total = 0;
+
+    for(int i = 0; i < m; i++)
+    {
+        //cout<<"i: "<<i<<endl;
+        if(encontrado)
+        {
+            if(tablero[fila][i] == jugador)
+            {
+                total++;
+            }
+            else
+            {
+                encontrado = false;
+                total = 0;
+            }
+        }
+        if(tablero[fila][i] == jugador && !encontrado)
+        {
+            encontrado = true;
+            total++;
+        }
+
+        //cout<<"total: "<<total<<endl;
+        if(total == 4)
+        {
+            cout<<"El jugador "<<jugador<<" gana!"<<endl;
+            return true;
+        }
+    }
+
+
+    return false;
+}
+
+int main()
+{
+    int matriz[n][m];
+
+    //Preparamos el tablero del juego rellenandolo con 0's
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < m; j++)
+        {
+            matriz[i][j] = 0;
+            //cout<<matriz[i][j]<<" ";
+        }
+        //cout<<" "<<endl;
+    }
+
+    //el  juego
+    int jugador = 0;
+    int ultimo = 0;
+    do
+    {
+        int colocarColumna = 0;
+        bool columnaTope = true;
+
+        if(ultimo == 1)
+        {
+            jugador = 2;
+        }
+        else
+        {
+            jugador = 1;
+        }
+
+        do
+        {
+            cout<<"Turno del jugador "<<jugador<<","<<ultimo<<" - Elije un numero del 0-7 "; cin>>colocarColumna; cout<<endl;
+
+            columnaTope = columnaATope(matriz,colocarColumna);
+        }
+        while((colocarColumna < 0 and colocarColumna > 7) and columnaTope);
+
+        int colocarFila = ColocarFichaEn(matriz,colocarColumna);
+        matriz[colocarFila][colocarColumna] = jugador;
+        ImprimirTablero(matriz);
+
+        //Revisar si hay un 4 en raya
+        if(ganador(matriz,colocarFila,colocarColumna,jugador))
+        {
+            break;
+        }
+
+        ultimo = jugador;
+        jugador++;
+    }
+    while(sobranEspaciosLibres(matriz));
+
+    return 0;
+}
