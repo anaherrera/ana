@@ -1,5 +1,10 @@
+#include <iostream>
 
-void coutmat(string  );
-void barco( string ,int,int,int,int );
-//void cantbarcos(string );
-void disparos(int,int,string );
+using namespace std;
+
+
+bool sobranEspaciosLibres(int );
+void ImprimirTablero(int );
+int ColocarFichaEn(int , int);
+bool columnaATope(int , int );
+bool ganador(int , int , int , int );
