@@ -158,6 +158,11 @@ bool ganador(int tablero[n][m], int fila, int columna, int jugador)
 
 int main()
 {
+    cout<<"........GOMOKU......"<<endl;
+    cout<<"cada jugador tiene un turno "<<endl;
+    cout<<"el objetivo es tener 4 fichas del mismo jugador ya se horizontal o vertical "<<endl;
+    cout<<"gana el primero que consigue tener 4 fichas juntas"<<endl;
+    cout<<endl;
     int matriz[n][m];
 
     //Preparamos el tablero del juego rellenandolo con 0's
@@ -190,11 +195,11 @@ int main()
 
         do
         {
-            cout<<"Turno del jugador "<<jugador<<","<<ultimo<<" - Elije un numero del 0-7 "; cin>>colocarColumna; cout<<endl;
+            cout<<"Turno del jugador "<<jugador<<" - Elije un numero del 0-7 "; cin>>colocarColumna; cout<<endl;
 
             columnaTope = columnaATope(matriz,colocarColumna);
         }
-        while((colocarColumna < 0 and colocarColumna > 7) and columnaTope);
+        while( columnaTope);
 
         int colocarFila = ColocarFichaEn(matriz,colocarColumna);
         matriz[colocarFila][colocarColumna] = jugador;
